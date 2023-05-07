@@ -1,23 +1,33 @@
 # frozen_string_literal: true
+
+# Прямоугольный треугольник.
+# Программа запрашивает у пользователя 3 стороны треугольника и определяет,
+# является ли треугольник прямоугольным (используя теорему Пифагора www-formula.ru),
+# равнобедренным (т.е. у него равны любые 2 стороны)  или равносторонним (все 3 стороны равны) и
+# выводит результат на экран.
+# Подсказка: чтобы воспользоваться теоремой Пифагора, нужно сначала найти самую длинную сторону (гипотенуза) и
+# сравнить ее значение в квадрате с суммой квадратов двух остальных сторон.
+# Если все 3 стороны равны, то треугольник равнобедренный и равносторонний, но не прямоугольный.
+
 class Triangle
   attr_reader :sides
   def initialize(side_1, side_2, side_3)
     @sides = [side_1, side_2, side_3]
   end
 
-  def side_1=(side_1) #setter method
+  def side_1=(side_1) # side 1 setter method
     @sides[0] = side_1
   end
   def side_1
     @sides[0]
   end
-  def side_2=(side_2) #setter method
+  def side_2=(side_2) # side 2 setter method
     @sides[1] = side_2
   end
   def side_2
     @sides[1]
   end
-  def side_3=(side_3) #setter method
+  def side_3=(side_3) # side 3 setter method
     @sides[2] = side_3
   end
   def side_3
