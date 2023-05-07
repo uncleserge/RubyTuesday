@@ -17,25 +17,8 @@ while height == 0
     puts "Ошибка! Введите число, отличное от 0."
   end
 end
-# print "Введите ваш рост: "
-# user_input= gets.chomp
-# height = user_input.to_f
-# begin
-#   height = user_input.to_f
-# rescue
-#   puts "Ошибка! Значение должно быть числом."
-# end
-# puts height.to_i
-# puts height.is_a?(Integer)
-# while !height.is_a?(Integer)
-#   print "Введите целое число: "
-#   height = gets.chomp
-# end
-# height = height.to_i
-
-# puts name
-# puts height
 
 result = (height - 110) * 1.15
+
 puts "#{name}, ваш результат - #{result}"
 puts "Ваш вес уже оптимальный" if result < 0
