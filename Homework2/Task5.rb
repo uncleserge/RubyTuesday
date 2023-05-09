@@ -15,27 +15,27 @@
 #     Год не високосный год (365 дней).
 
 class Gregorian_date
-  @@months = { January: 31, February: 28, March: 31, April: 30, May: 31, June: 30,
+  MONTHS = { January: 31, February: 28, March: 31, April: 30, May: 31, June: 30,
              July: 31, August: 31, September: 30, October: 31, November: 30, December: 31}
   def initialize(y, m, d)
     raise RangeError if y < 1582
     @year = y
     raise RangeError if m < 1 || m > 12
     @month = m
-    max_day_number = is_leap_year? && @month == 2 ? @@months.values[@month-1]+1 : @@months.values[@month-1]
+    max_day_number = is_leap_year? && @month == 2 ? MONTHS.values[@month-1]+1 : MONTHS.values[@month-1]
     raise RangeError if d < 1 || d > max_day_number
     @day = d
   end
   def is_leap_year? # високосный год ?
     (@year % 4 == 0) && !(@year % 100 == 0) || (@year % 400 == 0)
   end
-  def day_number_in_year # порядковый номер дня в году
-    result = @@months.values.take(@month-1).sum + @day
+  def day_number_in_year # порядковый номер дня в годуTask6
+    result = MONTHS.values.take(@month-1).sum + @day
     result += 1 if is_leap_year? && @month > 2
     result
   end
   def date
-    "Year: #{@year}, Month: #{@@months.keys[@month-1]}, Day: #{@day}"
+    "Year: #{@year}, Month: #{MONTHS.keys[@month-1]}, Day: #{@day}"
   end
 end
 
