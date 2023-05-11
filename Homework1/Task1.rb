@@ -5,20 +5,18 @@
 #   Если идеальный вес получается отрицательным,
 #   то выводится строка "Ваш вес уже оптимальный"
 
-print "Введите ваше имя: "
+print 'Введите ваше имя: '
 name = gets.chomp
 
 height = 0
-while height == 0
-  print "Введите ваш рост в см.: "
-  user_input= gets.chomp
+while height.zero?
+  print 'Введите ваш рост в см.: '
+  user_input = gets.chomp
   height = user_input.to_f
-  if height == 0
-    puts "Ошибка! Введите число, отличное от 0."
-  end
+  puts 'Ошибка! Введите число, отличное от 0.' if height.zero?
 end
 
 result = (height - 110) * 1.15
 
 puts "#{name}, ваш результат - #{result}"
-puts "Ваш вес уже оптимальный" if result < 0
+puts 'Ваш вес уже оптимальный' if result.negative?

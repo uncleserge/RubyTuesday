@@ -16,7 +16,7 @@ class Basket
   end
 
   def add_item(title, price, quantity)
-    @items[title.to_sym] = {price: price, quantity: quantity}
+    @items[title.to_sym] = { price: price, quantity: quantity }
   end
 
   def get_item_sum(title)
@@ -25,14 +25,14 @@ class Basket
   end
 
   def total
-    @items.values.sum(0) {|el| el[:price]*el[:quantity]}
+    @items.values.sum(0) { |el| el[:price] * el[:quantity] }
   end
 
   def print
     @items.each do |title, item|
-      puts "#{title.to_s}:   #{item[:price]}   x #{item[:quantity]}   = #{self.get_item_sum(title)}"
+      puts "#{title}:   #{item[:price]}   x #{item[:quantity]}   = #{get_item_sum(title)}"
     end
-    puts "Итого: #{self.total}"
+    puts "Итого: #{total}"
   end
 end
 
@@ -48,17 +48,17 @@ def get_number (msg, err_msg)
   result
 end
 
-basket=Basket.new
+basket = Basket.new
 
 loop do
-  print "Введите название товара: "
+  print 'Введите название товара: '
   title = gets.chomp
   break if %w[stop стоп].include? title
 
-  price = get_number("Введите цену за единицу:", "Ошибка! Введите число.")
-  quantity = get_number("Введите количество:", "Ошибка! Введите число.")
+  price = get_number('Введите цену за единицу:', 'Ошибка! Введите число.')
+  quantity = get_number('Введите количество:', 'Ошибка! Введите число.')
 
-  basket.add_item(title,price,quantity)
+  basket.add_item(title, price, quantity)
 end
 
 basket.print

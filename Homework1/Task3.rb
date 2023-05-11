@@ -11,41 +11,53 @@
 
 class Triangle
   attr_reader :sides
+
   def initialize(side_1, side_2, side_3)
     @sides = [side_1, side_2, side_3]
   end
 
-  def side_1=(side_1) # side 1 setter method
+  # side 1 setter method
+  def side_1=(side_1)
     @sides[0] = side_1
   end
+
   def side_1
     @sides[0]
   end
-  def side_2=(side_2) # side 2 setter method
+
+  # side 2 setter method
+  def side_2=(side_2)
     @sides[1] = side_2
   end
+
   def side_2
     @sides[1]
   end
-  def side_3=(side_3) # side 3 setter method
+
+  # side 3 setter method
+  def side_3=(side_3)
     @sides[2] = side_3
   end
+
   def side_3
     @sides[2]
   end
 
-  def is_equilateral? # равносторонний ?
+  # равносторонний ?
+  def equilateral?
     true if @sides.uniq.size == 1
   end
 
-  def is_rectangular? # прямоугольный ?
+  # прямоугольный ?
+  def rectangular?
     sides = Array.new(@sides)
     max_side = sides.max
     index_of_max = sides.index(max_side)
     sides.delete_at(index_of_max)**2 == sides[0]**2 + sides[1]**2
   end
 
-  def is_isosceles? # равнобедренный ?
+  # равнобедренный ?
+  def isosceles?
     true if @sides.uniq.size <= 2
   end
 
@@ -55,7 +67,7 @@ def get_number (msg, err_msg)
   begin
     print msg
     result = Float(gets)
-    raise if result < 0
+    raise if result.negative?
   rescue
     puts err_msg
     retry
@@ -64,12 +76,12 @@ def get_number (msg, err_msg)
   result
 end
 
-side_1 = get_number("Введите длину стороны 1: ", "Ошибка! Введите число больше 0.")
-side_2 = get_number("Введите длину стороны 2: ", "Ошибка! Введите число больше 0.")
-side_3 = get_number("Введите длину стороны 3: ", "Ошибка! Введите число больше 0.")
+side_1 = get_number('Введите длину стороны 1: ', 'Ошибка! Введите число больше 0.')
+side_2 = get_number('Введите длину стороны 2: ', 'Ошибка! Введите число больше 0.')
+side_3 = get_number('Введите длину стороны 3: ', 'Ошибка! Введите число больше 0.')
 triangle = Triangle.new(side_1, side_2, side_3)
 
 puts "Стороны треугольника: #{triangle.sides}"
-puts "треугольник является прямоугольным" if triangle.is_rectangular?
-puts "треугольник является равнобедренным" if triangle.is_isosceles?
-puts "треугольник является равносторонним" if triangle.is_equilateral?
+puts 'треугольник является прямоугольным' if triangle.rectangular?
+puts 'треугольник является равнобедренным' if triangle.isosceles?
+puts 'треугольник является равносторонним' if triangle.equilateral?

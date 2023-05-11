@@ -21,14 +21,12 @@ class Quadratic_equation
   end
   def roots
     denom = 2 * @coef_a
-    discrim = self.discriminant
+    sqrt_discrim = Math.sqrt(discriminant)
 
-    if discrim > 0
-      [(-@coef_b + Math.sqrt(discrim))/denom, (-@coef_b - Math.sqrt(discrim))/denom]
-    elsif discriminant == 0
+    if discriminant.positive?
+      [(-@coef_b + sqrt_discrim)/denom, (-@coef_b - sqrt_discrim)/denom]
+    elsif discriminant.zero?
       -@coef_b / denom
-    else
-      nil
     end
   end
 end
@@ -45,20 +43,20 @@ def get_number (msg, err_msg)
   result
 end
 
-coef_a= get_number("Введите коэффициент 'a': ", "Ошибка! Введите число.")
-coef_b = get_number("Введите коэффициент 'b': ", "Ошибка! Введите число.")
-coef_c = get_number("Введите коэффициент 'c': ", "Ошибка! Введите число.")
+coef_a= get_number("Введите коэффициент 'a': ", 'Ошибка! Введите число.')
+coef_b = get_number("Введите коэффициент 'b': ", 'Ошибка! Введите число.')
+coef_c = get_number("Введите коэффициент 'c': ", 'Ошибка! Введите число.')
 
 equation = Quadratic_equation.new(coef_a, coef_b, coef_c)
 
-puts "Уравнение: #{coef_a} x^2 + #{coef_b} x + c = 0"
+puts "Уравнение: #{coef_a} x^2 + #{coef_b} x + #{coef_c} = 0"
 puts "Дискриминант: #{equation.discriminant}"
-if equation.discriminant > 0
+if equation.discriminant.positive?
   puts "Корни уравнения: #{equation.roots}"
-elsif equation.discriminant == 0
+elsif equation.discriminant.zero?
   puts "Корень уравнения: #{equation.roots}"
 else
-  puts "Корней нет."
+  puts 'Корней нет.'
 end
 
 

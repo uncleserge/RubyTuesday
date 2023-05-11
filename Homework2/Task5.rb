@@ -14,32 +14,41 @@
 #     Год високосный (366 дней).
 #     Год не високосный год (365 дней).
 
-class Gregorian_date
+class GregorianDate
   MONTHS = { January: 31, February: 28, March: 31, April: 30, May: 31, June: 30,
-             July: 31, August: 31, September: 30, October: 31, November: 30, December: 31}
+             July: 31, August: 31, September: 30, October: 31, November: 30, December: 31}.freeze
   def initialize(y, m, d)
     raise RangeError if y < 1582
+
     @year = y
     raise RangeError if m < 1 || m > 12
+
     @month = m
-    max_day_number = is_leap_year? && @month == 2 ? MONTHS.values[@month-1]+1 : MONTHS.values[@month-1]
+    max_day_number = leap_year? && @month == 2 ? MONTHS.values[@month-1]+1 : MONTHS.values[@month-1]
     raise RangeError if d < 1 || d > max_day_number
+
     @day = d
   end
-  def is_leap_year? # високосный год ?
-    (@year % 4 == 0) && !(@year % 100 == 0) || (@year % 400 == 0)
+
+  # високосный год ?
+  def leap_year?
+    (@year % 4).zero? && !(@year % 100).zero? || (@year % 400).zero?
   end
-  def day_number_in_year # порядковый номер дня в годуTask6
+
+  # порядковый номер дня в годуTask6
+  def day_number_in_year
     result = MONTHS.values.take(@month-1).sum + @day
-    result += 1 if is_leap_year? && @month > 2
+    result += 1 if leap_year? && @month > 2
     result
   end
+
   def date
-    "Year: #{@year}, Month: #{MONTHS.keys[@month-1]}, Day: #{@day}"
+    "Year: #{@year}, Month: #{MONTHS.keys[@month - 1]}, Day: #{@day}"
   end
 end
 
-def get_number (msg, err_msg) # user input function
+# user input function
+def get_number (msg, err_msg)
   begin
     print msg
     result = Integer(gets)
@@ -52,12 +61,12 @@ def get_number (msg, err_msg) # user input function
 end
 
 begin
-  year = get_number("Введите год: ", "Ошибка! Введите число от 1582.")
-  month = get_number("Введите месяц: ", "Ошибка! Введите число от 1 до 12.")
-  day = get_number("Введите день: ", "Ошибка! Введите число от 1 до 31.")
-  my_date = Gregorian_date.new(year, month, day)
+  year = get_number('Введите год: ', 'Ошибка! Введите число от 1582.')
+  month = get_number('Введите месяц: ', 'Ошибка! Введите число от 1 до 12.')
+  day = get_number('Введите день: ', 'Ошибка! Введите число от 1 до 31.')
+  my_date = GregorianDate.new(year, month, day)
 rescue
-  puts "Ошибка! Вы ввели неверную дату."
+  puts 'Ошибка! Вы ввели неверную дату.'
   retry
 end
 
