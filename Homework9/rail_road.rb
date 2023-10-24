@@ -75,7 +75,8 @@ class RailRoad
     index = UI.get_num('Select train type: ', 'Please enter correct numeric value.', @types.length)
     index -= 1
     type = @types[index]
-    train_num = UI.get_str('Enter train number: ', 'Please, enter non empty value.')
+    train_num = UI.get_str('Enter train number in XXXXX or XXX-XX format, where X is digit or letter: ',
+                           'Please, enter correct non empty value.')
     case type
     when :cargo
       CargoTrain.new(train_num)
@@ -147,9 +148,9 @@ class RailRoad
     @routes << Route.new(@stations[index_first], @stations[index_last])
     puts('Route added.')
     show_routes
-  rescue StandardError => e
-    puts e.message
-    retry
+  # rescue StandardError => e
+  #   puts e.message
+  #   retry
   end
 
   def add_station_to_route
